@@ -1,0 +1,23 @@
+// ============================================
+// YUUSELL LOGISTICS PLATFORM — Audit Logs
+// ============================================
+
+model AuditLog {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String?  @map("user_id") @db.Uuid
+  action    String
+  entity    String
+  entityId  String?  @map("entity_id")
+  payload   Json?
+  ip        String?
+  userAgent String?  @map("user_agent")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([entity, entityId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}

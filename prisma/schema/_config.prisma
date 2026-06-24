@@ -1,0 +1,11 @@
+// ============================================
+// YUUSELL LOGISTICS PLATFORM — Prisma Config
+// ============================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}

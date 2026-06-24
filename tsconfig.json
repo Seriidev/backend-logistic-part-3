@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node10",
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "ignoreDeprecations": "5.0",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES2023",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@config/*": ["./src/config/*"],
+      "@database/*": ["./src/database/*"],
+      "@core/*": ["./src/core/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@api/*": ["./src/api/*"],
+      "@gateways/*": ["./src/gateways/*"],
+      "@integrations/*": ["./src/integrations/*"],
+      "@jobs/*": ["./src/jobs/*"],
+      "@generated/*": ["./generated/*"]
+    }
+  }
+}

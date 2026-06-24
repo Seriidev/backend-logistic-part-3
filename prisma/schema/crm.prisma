@@ -1,0 +1,57 @@
+// ============================================
+// YUUSELL LOGISTICS PLATFORM — CRM (Customers & Tickets)
+// ============================================
+
+model Customer {
+  id          String   @id @default(uuid()) @db.Uuid
+  userId      String   @unique @map("user_id") @db.Uuid
+  companyName String?  @map("company_name")
+  address     String?
+  city        String?
+  country     String?
+  postalCode  String?  @map("postal_code")
+  notes       String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  customerNotes CustomerNote[]
+  tickets       Ticket[]
+
+  @@map("customers")
+}
+
+model CustomerNote {
+  id         String   @id @default(uuid()) @db.Uuid
+  customerId String   @map("customer_id") @db.Uuid
+  content    String
+  createdBy  String   @map("created_by")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  // Relations
+  customer Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+
+  @@index([customerId])
+  @@map("customer_notes")
+}
+
+model Ticket {
+  id          String       @id @default(uuid()) @db.Uuid
+  customerId  String       @map("customer_id") @db.Uuid
+  subject     String
+  description String?
+  status      TicketStatus @default(OPEN)
+  priority    String       @default("medium")
+  assignedTo  String?      @map("assigned_to") @db.Uuid
+  createdAt   DateTime     @default(now()) @map("created_at")
+  updatedAt   DateTime     @updatedAt @map("updated_at")
+
+  // Relations
+  customer     Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  assignedUser User?    @relation("AssignedTickets", fields: [assignedTo], references: [id])
+
+  @@index([customerId])
+  @@index([status])
+  @@map("tickets")
+}

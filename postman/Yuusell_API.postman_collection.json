@@ -1,0 +1,2240 @@
+{
+  "item": [
+    {
+      "id": "f49bd60b-e87d-4770-98d8-5f93a56e964a",
+      "name": "Auth",
+      "description": {
+        "content": "Authentication & Authorization",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ac2e6075-aeed-4650-8733-bd874395c42b",
+          "name": "Register a new user",
+          "request": {
+            "name": "Register a new user",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "register"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"StrongP@ss123\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"phone\": \"+1234567890\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9dad3948-bb1a-405c-82a5-a73e7abf0040",
+              "name": "User registered successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "register"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"StrongP@ss123\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"phone\": \"+1234567890\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "39792254-58c5-432b-9a72-d24c519587be",
+              "name": "Email already exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "register"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"StrongP@ss123\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"phone\": \"+1234567890\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const response = pm.response.json();",
+                  "if (response.data && response.data.tokens) {",
+                  "    pm.environment.set(\"accessToken\", response.data.tokens.accessToken);",
+                  "    pm.environment.set(\"refreshToken\", response.data.tokens.refreshToken);",
+                  "    console.log(\"✅ Tokens saved to environment variables\");",
+                  "}",
+                  "",
+                  "pm.test(\"Status code is successful\", function () {",
+                  "    pm.response.to.have.status(200) || pm.response.to.have.status(201);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "438c5ccd-838e-454b-8226-08fe43b94da1",
+          "name": "Login with email and password",
+          "request": {
+            "name": "Login with email and password",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"StrongP@ss123\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a21be7df-e99e-43df-8b54-b39d9ce30294",
+              "name": "Login successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"StrongP@ss123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "da82052d-104a-418c-9062-0001e7787ced",
+              "name": "Invalid credentials or locked",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "login"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"StrongP@ss123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const response = pm.response.json();",
+                  "if (response.data && response.data.tokens) {",
+                  "    pm.environment.set(\"accessToken\", response.data.tokens.accessToken);",
+                  "    pm.environment.set(\"refreshToken\", response.data.tokens.refreshToken);",
+                  "    console.log(\"✅ Tokens saved to environment variables\");",
+                  "}",
+                  "",
+                  "pm.test(\"Status code is successful\", function () {",
+                  "    pm.response.to.have.status(200) || pm.response.to.have.status(201);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "79dde46b-4000-4790-b34c-5010d2a98db1",
+          "name": "Refresh access token",
+          "request": {
+            "name": "Refresh access token",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "refresh"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "noauth"
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ce1154dc-777d-4020-8692-586b8fe62982",
+              "name": "Tokens refreshed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "refresh"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"refreshToken\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cdc54b68-5098-4c65-83b9-b05518f93c08",
+              "name": "Invalid refresh token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "refresh"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"refreshToken\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const response = pm.response.json();",
+                  "if (response.data) {",
+                  "    pm.environment.set(\"accessToken\", response.data.accessToken);",
+                  "    pm.environment.set(\"refreshToken\", response.data.refreshToken);",
+                  "    console.log(\"✅ Tokens refreshed and saved\");",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d3ba1c78-a1e7-412f-aa57-c4112ab6a659",
+          "name": "Logout (invalidate session)",
+          "request": {
+            "name": "Logout (invalidate session)",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "logout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST"
+          },
+          "response": [
+            {
+              "id": "5b5a7c12-81b9-4bde-b3b0-8a0797860899",
+              "name": "Logged out successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "logout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2999c93a-a124-48a3-9c0a-d7b50daca5e8",
+          "name": "Get current user profile",
+          "request": {
+            "name": "Get current user profile",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "me"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "2f74a30a-916f-4a41-adaf-d29b688be598",
+              "name": "User profile",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "me"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c9a20f06-1d75-4126-bd9e-8fc2013cf452",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "me"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4497b0f5-cf74-47d4-97ac-f3327cb2f501",
+          "name": "Change password",
+          "request": {
+            "name": "Change password",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "password"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"oldPassword\": \"string\",\n  \"newPassword\": \"stringstring\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a5285345-7bc9-476d-aee1-bdcc4fa81a47",
+              "name": "Password changed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "password"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oldPassword\": \"string\",\n  \"newPassword\": \"stringstring\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "01999020-c32f-4c2f-a6d9-640625c6c9cd",
+              "name": "Current password incorrect",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "password"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"oldPassword\": \"string\",\n  \"newPassword\": \"stringstring\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c3de3f83-f410-4e0e-91f5-20c2fa742245",
+          "name": "Request password reset email",
+          "request": {
+            "name": "Request password reset email",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "forgot-password"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "82ed450a-3385-4d76-bf4a-d3d8a3a3bcc9",
+              "name": "Reset email sent if account exists",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "forgot-password"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"user@example.com\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9ad8016-b116-4326-88e4-674252467551",
+          "name": "Reset password with token",
+          "request": {
+            "name": "Reset password with token",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "reset-password"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"string\",\n  \"newPassword\": \"stringstring\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4c9dd375-6aad-44ae-9fd9-af03faed53f7",
+              "name": "Password reset successful",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "reset-password"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"string\",\n  \"newPassword\": \"stringstring\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ca93e1b2-2bc3-4f2d-91db-f79400407ef9",
+              "name": "Invalid or expired token",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "auth",
+                    "reset-password"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"token\": \"string\",\n  \"newPassword\": \"stringstring\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "2cf02d6f-20c5-4bae-ab9b-61dbc42c9315",
+      "name": "Users",
+      "description": {
+        "content": "User Management",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "f7774da4-b727-4c0f-99b6-46251a2b1d6f",
+      "name": "Shipments",
+      "description": {
+        "content": "Shipment Management",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0fa29743-2156-43d3-9f24-76c077df58fb",
+          "name": "Create a new shipment",
+          "request": {
+            "name": "Create a new shipment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "shipments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"senderId\": \"string\",\n  \"recipientId\": \"string\",\n  \"description\": \"string\",\n  \"weight\": 2.5,\n  \"dimensions\": \"30x20x15\",\n  \"quantity\": 1,\n  \"originAddress\": \"string\",\n  \"destinationAddress\": \"string\",\n  \"declaredValue\": 100,\n  \"shippingCost\": 15.5,\n  \"currency\": \"USD\",\n  \"notes\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e6ad735f-a73a-49a3-9d0f-efde1c7f81e3",
+              "name": "Shipment created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"senderId\": \"string\",\n  \"recipientId\": \"string\",\n  \"description\": \"string\",\n  \"weight\": 2.5,\n  \"dimensions\": \"30x20x15\",\n  \"quantity\": 1,\n  \"originAddress\": \"string\",\n  \"destinationAddress\": \"string\",\n  \"declaredValue\": 100,\n  \"shippingCost\": 15.5,\n  \"currency\": \"USD\",\n  \"notes\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "288699d8-6778-4ff2-9ad9-bd4d1dfab3e7",
+          "name": "List shipments with filters and pagination",
+          "request": {
+            "name": "List shipments with filters and pagination",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "shipments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "DELIVERED",
+                  "description": "Filter by status"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "string",
+                  "description": "Search by tracking number or description"
+                },
+                {
+                  "disabled": false,
+                  "key": "senderId",
+                  "value": "string",
+                  "description": "Filter by sender ID (UUID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "recipientId",
+                  "value": "string",
+                  "description": "Filter by recipient ID (UUID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "assignedDriverId",
+                  "value": "string",
+                  "description": "Filter by driver ID (UUID)"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateFrom",
+                  "value": "string",
+                  "description": "Start date filter (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "dateTo",
+                  "value": "string",
+                  "description": "End date filter (ISO 8601)"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "createdAt",
+                  "description": "Sort by field"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortOrder",
+                  "value": "desc",
+                  "description": "Sort order"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "12402c56-180f-4e73-ba16-82547c270acc",
+              "name": "Paginated shipment list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "status",
+                      "value": "DELIVERED"
+                    },
+                    {
+                      "key": "search",
+                      "value": "string"
+                    },
+                    {
+                      "key": "senderId",
+                      "value": "string"
+                    },
+                    {
+                      "key": "recipientId",
+                      "value": "string"
+                    },
+                    {
+                      "key": "assignedDriverId",
+                      "value": "string"
+                    },
+                    {
+                      "key": "dateFrom",
+                      "value": "string"
+                    },
+                    {
+                      "key": "dateTo",
+                      "value": "string"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "createdAt"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ccb904bb-9747-485f-bad6-0ec59559c4e3",
+          "name": "Get shipment statistics for dashboard",
+          "request": {
+            "name": "Get shipment statistics for dashboard",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                "stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "ae443890-9628-449e-a581-d277ca98a7bf",
+              "name": "Shipment statistics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments",
+                    "stats"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9d51ac1b-2e09-4619-981e-5bd5f2856973",
+          "name": "Bulk update shipment statuses",
+          "request": {
+            "name": "Bulk update shipment statuses",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                "bulk-status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"shipmentId\": \"string\",\n      \"status\": \"PENDING\",\n      \"note\": \"string\"\n    },\n    {\n      \"shipmentId\": \"string\",\n      \"status\": \"CANCELLED\",\n      \"note\": \"string\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "18e81dad-b55f-4937-89ac-0ecb56291643",
+              "name": "Bulk update results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments",
+                    "bulk-status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"items\": [\n    {\n      \"shipmentId\": \"string\",\n      \"status\": \"READY_FOR_PICKUP\",\n      \"note\": \"string\"\n    },\n    {\n      \"shipmentId\": \"string\",\n      \"status\": \"PROCESSING\",\n      \"note\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8af9db69-9a84-4063-a7fb-3542fbd769c8",
+          "name": "Get shipment details",
+          "request": {
+            "name": "Get shipment details",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "0dca5a80-f3c9-f310-cc4d-69e807ea6752",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "477c2d56-9f6a-4583-8154-701844a22b4d",
+              "name": "Shipment details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "0dca5a80-f3c9-f310-cc4d-69e807ea6752",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "51f6988c-3e79-4f93-b89d-69d796df45c1",
+          "name": "Update shipment details",
+          "request": {
+            "name": "Update shipment details",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "0dca5a80-f3c9-f310-cc4d-69e807ea6752",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"senderId\": \"string\",\n  \"recipientId\": \"string\",\n  \"description\": \"string\",\n  \"weight\": 2.5,\n  \"dimensions\": \"30x20x15\",\n  \"quantity\": 1,\n  \"originAddress\": \"string\",\n  \"destinationAddress\": \"string\",\n  \"declaredValue\": 100,\n  \"shippingCost\": 15.5,\n  \"currency\": \"USD\",\n  \"notes\": \"string\",\n  \"assignedDriverId\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bb9286c4-a917-4539-83ae-f6f54947ebc3",
+              "name": "Shipment updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "0dca5a80-f3c9-f310-cc4d-69e807ea6752",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"senderId\": \"string\",\n  \"recipientId\": \"string\",\n  \"description\": \"string\",\n  \"weight\": 2.5,\n  \"dimensions\": \"30x20x15\",\n  \"quantity\": 1,\n  \"originAddress\": \"string\",\n  \"destinationAddress\": \"string\",\n  \"declaredValue\": 100,\n  \"shippingCost\": 15.5,\n  \"currency\": \"USD\",\n  \"notes\": \"string\",\n  \"assignedDriverId\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "520fd733-03fb-48ef-99e9-a58cb790a8eb",
+          "name": "Soft delete a shipment",
+          "request": {
+            "name": "Soft delete a shipment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "0dca5a80-f3c9-f310-cc4d-69e807ea6752",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "0df91fd6-e9c7-4a86-af56-b496051fdd2e",
+              "name": "Shipment deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "0dca5a80-f3c9-f310-cc4d-69e807ea6752",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7794ba4-46fd-45cf-aef0-38f46e71ce92",
+          "name": "Update shipment status (state machine)",
+          "request": {
+            "name": "Update shipment status (state machine)",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                ":id",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "0dca5a80-f3c9-f310-cc4d-69e807ea6752",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"RETURNED\",\n  \"note\": \"string\",\n  \"latitude\": 8272.457926797653,\n  \"longitude\": 9508.950941174004\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8fa81bc4-d2de-4d9c-8f0e-3da67c355145",
+              "name": "Status updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments",
+                    ":id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "0dca5a80-f3c9-f310-cc4d-69e807ea6752",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"RETURNED\",\n  \"note\": \"string\",\n  \"latitude\": 8272.457926797653,\n  \"longitude\": 9508.950941174004\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8db3678c-6e83-4caa-a37d-d5d5e68184a7",
+              "name": "Invalid status transition",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments",
+                    ":id",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "0dca5a80-f3c9-f310-cc4d-69e807ea6752",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"RETURNED\",\n  \"note\": \"string\",\n  \"latitude\": 8272.457926797653,\n  \"longitude\": 9508.950941174004\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a7e4bf16-e167-4dc5-988d-8cba3d4f7074",
+          "name": "Get shipment status change history",
+          "request": {
+            "name": "Get shipment status change history",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                ":id",
+                "history"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "0dca5a80-f3c9-f310-cc4d-69e807ea6752",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "69f2cdd8-988b-44de-8abc-4e826f95db6a",
+              "name": "Status history list",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments",
+                    ":id",
+                    "history"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "0dca5a80-f3c9-f310-cc4d-69e807ea6752",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d87e0aff-9268-4829-a13c-d0b1bf6ad6cb",
+          "name": "Upload a document for a shipment",
+          "request": {
+            "name": "Upload a document for a shipment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                ":id",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "0dca5a80-f3c9-f310-cc4d-69e807ea6752",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "type",
+                  "value": "LABEL",
+                  "type": "text",
+                  "description": " (This can only be one of LABEL,INVOICE,WAYBILL,PHOTO,OTHER)"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ad29def7-9df8-4ee3-8ecc-9e208377a08e",
+              "name": "Document uploaded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments",
+                    ":id",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "0dca5a80-f3c9-f310-cc4d-69e807ea6752",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "type": "file"
+                    },
+                    {
+                      "description": {
+                        "content": " (This can only be one of LABEL,INVOICE,WAYBILL,PHOTO,OTHER)",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "LABEL",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13bc4f12-c5b4-4d9d-92ea-b8add4219703",
+          "name": "Generate and download shipment label (PDF)",
+          "request": {
+            "name": "Generate and download shipment label (PDF)",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                ":id",
+                "label"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "0dca5a80-f3c9-f310-cc4d-69e807ea6752",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "5483c606-b003-400f-a3ec-b60eb262f078",
+              "name": "PDF label",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments",
+                    ":id",
+                    "label"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "0dca5a80-f3c9-f310-cc4d-69e807ea6752",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc5c89ad-32f5-493b-854b-40bffa246fc2",
+          "name": "Get document download URL",
+          "request": {
+            "name": "Get document download URL",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "v1",
+                "shipments",
+                "documents",
+                ":documentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "0dca5a80-f3c9-f310-cc4d-69e807ea6752",
+                  "key": "documentId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "01e0d4a2-7efb-4885-a0e9-2b000eb9734a",
+              "name": "Document with download URL",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v1",
+                    "shipments",
+                    "documents",
+                    ":documentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "0dca5a80-f3c9-f310-cc4d-69e807ea6752",
+                      "key": "documentId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "eff286dd-9835-4558-a3a1-4830daedccf4",
+      "name": "Tracking",
+      "description": {
+        "content": "Tracking & GPS",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "d5cdc6cc-9586-4c3f-a969-c5d787edcb78",
+      "name": "Warehouse",
+      "description": {
+        "content": "Warehouse Management",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "d74e4bbc-68e2-485b-898a-dee39459aa18",
+      "name": "Wallet",
+      "description": {
+        "content": "Internal Wallet",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "3976eb54-9f75-480d-a9d9-975c3b304380",
+      "name": "CRM",
+      "description": {
+        "content": "Customer Management",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "a7a653c7-2ab9-4ca3-b965-6be5fce35797",
+      "name": "Notifications",
+      "description": {
+        "content": "Notification Service",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Centralized auth header injection (collection level).",
+          "const token = pm.environment.get('accessToken');",
+          "if (token) {",
+          "    pm.request.headers.upsert({",
+          "        key: 'Authorization',",
+          "        value: 'Bearer ' + token,",
+          "    });",
+          "}"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "99ca1029-d342-4c03-84a7-accc13c85e36",
+    "name": "Yuusell Logistics Platform",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Yuusell Logistics Platform — REST API Documentation",
+      "type": "text/plain"
+    }
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{accessToken}}",
+        "type": "string"
+      }
+    ]
+  }
+}

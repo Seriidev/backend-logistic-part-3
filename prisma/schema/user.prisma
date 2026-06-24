@@ -1,0 +1,50 @@
+// ============================================
+// YUUSELL LOGISTICS PLATFORM — User & Session
+// ============================================
+
+model User {
+  id           String    @id @default(uuid()) @db.Uuid
+  email        String    @unique
+  phone        String?
+  passwordHash String    @map("password_hash")
+  role         UserRole  @default(CUSTOMER)
+  isActive     Boolean   @default(true) @map("is_active")
+  firstName    String?   @map("first_name")
+  lastName     String?   @map("last_name")
+  avatar       String?
+  lastLoginAt  DateTime? @map("last_login_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+
+  // Relations
+  sessions          Session[]
+  wallet            Wallet?
+  sentShipments     Shipment[]      @relation("SenderShipments")
+  receivedShipments Shipment[]      @relation("RecipientShipments")
+  driverShipments   Shipment[]      @relation("DriverShipments")
+  uploadedDocuments Document[]
+  customer          Customer?
+  assignedTickets   Ticket[]        @relation("AssignedTickets")
+  notifications     Notification[]
+  auditLogs         AuditLog[]
+  shipmentEvents    ShipmentEvent[]
+
+  @@map("users")
+}
+
+model Session {
+  id           String   @id @default(uuid()) @db.Uuid
+  userId       String   @map("user_id") @db.Uuid
+  refreshToken String   @map("refresh_token")
+  userAgent    String?  @map("user_agent")
+  ip           String?
+  expiresAt    DateTime @map("expires_at")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([refreshToken])
+  @@map("sessions")
+}

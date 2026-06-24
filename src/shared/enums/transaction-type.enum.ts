@@ -1,0 +1,8 @@
+export enum TransactionType {
+  TRANSFER_IN = 'TRANSFER_IN',
+  TRANSFER_OUT = 'TRANSFER_OUT',
+  BONUS = 'BONUS',
+  REFERRAL = 'REFERRAL',
+  COMMISSION = 'COMMISSION',
+  FEE = 'FEE',
+}

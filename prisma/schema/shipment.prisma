@@ -1,0 +1,87 @@
+// ============================================
+// YUUSELL LOGISTICS PLATFORM — Shipments
+// ============================================
+
+model Shipment {
+  id               String         @id @default(uuid()) @db.Uuid
+  trackingNumber   String         @unique @map("tracking_number")
+  senderId         String         @map("sender_id") @db.Uuid
+  recipientId      String?        @map("recipient_id") @db.Uuid
+  assignedDriverId String?        @map("assigned_driver_id") @db.Uuid
+  status           ShipmentStatus @default(DRAFT)
+
+  // Cargo details
+  description String?
+  weight      Decimal?  @db.Decimal(10, 2)
+  dimensions  String?
+  quantity    Int       @default(1)
+
+  // Addresses
+  originAddress      String? @map("origin_address")
+  destinationAddress String? @map("destination_address")
+
+  // Financials
+  declaredValue  Decimal? @map("declared_value") @db.Decimal(10, 2)
+  shippingCost   Decimal? @map("shipping_cost") @db.Decimal(10, 2)
+  currency       String   @default("USD")
+
+  // Metadata
+  notes     String?
+  isDeleted Boolean  @default(false) @map("is_deleted")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  sender         User             @relation("SenderShipments", fields: [senderId], references: [id])
+  recipient      User?            @relation("RecipientShipments", fields: [recipientId], references: [id])
+  assignedDriver User?            @relation("DriverShipments", fields: [assignedDriverId], references: [id])
+  events         ShipmentEvent[]
+  documents      Document[]
+  warehouseItem  WarehouseItem?
+
+  @@index([senderId])
+  @@index([recipientId])
+  @@index([assignedDriverId])
+  @@index([status])
+  @@index([trackingNumber])
+  @@index([createdAt])
+  @@map("shipments")
+}
+
+model ShipmentEvent {
+  id         String         @id @default(uuid()) @db.Uuid
+  shipmentId String         @map("shipment_id") @db.Uuid
+  status     ShipmentStatus
+  note       String?
+  latitude   Decimal?       @db.Decimal(10, 7)
+  longitude  Decimal?       @db.Decimal(10, 7)
+  createdBy  String?        @map("created_by") @db.Uuid
+  createdAt  DateTime       @default(now()) @map("created_at")
+
+  // Relations
+  shipment Shipment @relation(fields: [shipmentId], references: [id], onDelete: Cascade)
+  user     User?    @relation(fields: [createdBy], references: [id])
+
+  @@index([shipmentId])
+  @@index([createdAt])
+  @@map("shipment_events")
+}
+
+model Document {
+  id         String       @id @default(uuid()) @db.Uuid
+  shipmentId String       @map("shipment_id") @db.Uuid
+  type       DocumentType @default(OTHER)
+  fileName   String       @map("file_name")
+  fileUrl    String       @map("file_url")
+  fileSize   Int?         @map("file_size")
+  mimeType   String?      @map("mime_type")
+  uploadedBy String       @map("uploaded_by") @db.Uuid
+  createdAt  DateTime     @default(now()) @map("created_at")
+
+  // Relations
+  shipment Shipment @relation(fields: [shipmentId], references: [id], onDelete: Cascade)
+  uploader User     @relation(fields: [uploadedBy], references: [id])
+
+  @@index([shipmentId])
+  @@map("documents")
+}

@@ -1,0 +1,54 @@
+// ============================================
+// YUUSELL LOGISTICS PLATFORM — Enums
+// ============================================
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  MANAGER
+  WAREHOUSE
+  DRIVER
+  CUSTOMER
+}
+
+enum ShipmentStatus {
+  DRAFT
+  PENDING
+  PROCESSING
+  READY_FOR_PICKUP
+  IN_TRANSIT
+  DELIVERED
+  RETURNED
+  CANCELLED
+}
+
+enum TransactionType {
+  TRANSFER_IN
+  TRANSFER_OUT
+  BONUS
+  REFERRAL
+  COMMISSION
+  FEE
+}
+
+enum NotificationChannel {
+  SMS
+  EMAIL
+  PUSH
+  IN_APP
+}
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum DocumentType {
+  LABEL
+  INVOICE
+  WAYBILL
+  PHOTO
+  OTHER
+}

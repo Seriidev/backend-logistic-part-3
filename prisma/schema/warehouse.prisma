@@ -1,0 +1,22 @@
+// ============================================
+// YUUSELL LOGISTICS PLATFORM — Warehouse
+// ============================================
+
+model WarehouseItem {
+  id         String    @id @default(uuid()) @db.Uuid
+  shipmentId String    @unique @map("shipment_id") @db.Uuid
+  location   String?
+  barcode    String?
+  receivedAt DateTime  @default(now()) @map("received_at")
+  outboundAt DateTime? @map("outbound_at")
+  notes      String?
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+
+  // Relations
+  shipment Shipment @relation(fields: [shipmentId], references: [id], onDelete: Cascade)
+
+  @@index([location])
+  @@index([barcode])
+  @@map("warehouse_items")
+}
